@@ -1,0 +1,18 @@
+@use '@styles/mixins' as mix;
+
+.main {
+  display: flex;
+  flex: 1;
+  margin-left: 527px;
+  padding-top: 9px;
+  padding-bottom: 60px;
+
+  @include mix.responsive(breakpoint-lg) {
+    margin-left: 362px;
+  }
+
+  @include mix.responsive(breakpoint-xs) {
+    margin-left: 72px;
+    padding-bottom: 115px;
+  }
+}

@@ -1,0 +1,45 @@
+@use '@styles/mixins' as mix;
+
+*,
+html {
+  color: var(--white-base);
+  font-family: var(--font-helvetica);
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--black);
+
+  &::before {
+    content: '';
+    top: 138px;
+    left: -136px;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    width: 536px;
+    height: 620px;
+    background-image: url('../../../public/img/bg_earth.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+
+    @include mix.responsive(breakpoint-lg) {
+      left: -73px;
+      width: 377px;
+      height: 436px;
+    }
+
+    @include mix.responsive(breakpoint-xs) {
+      left: -329px;
+      top: 123px;
+      width: 377px;
+      height: 436px;
+    }
+  }
+}
