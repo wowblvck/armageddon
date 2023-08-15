@@ -20,8 +20,15 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@public/*": ["./public/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@features/*": ["./src/features/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@common/*": ["./src/common/*"],
+      "@styles/*": ["./src/app/styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

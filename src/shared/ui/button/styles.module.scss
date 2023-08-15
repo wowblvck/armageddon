@@ -1,0 +1,40 @@
+.btn {
+  height: 48px;
+  padding: 8px 16px;
+  border-radius: 40px;
+  border: none;
+  outline: none;
+  background-color: var(--orange-base);
+  font-family: var(--font-helvetica);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--white-base);
+  cursor: pointer;
+}
+
+.btn-small {
+  height: 24px;
+  padding: 2px 11px;
+  border-radius: 16px;
+  font-size: 11px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn-order {
+  background-color: var(--orange-smooth);
+  color: var(--orange-base);
+  transition: all 0.3s;
+}
+
+.btn-order:hover {
+  background-color: var(--orange-base);
+  color: var(--white-base);
+}
+
+.btn-cart {
+  background-color: var(--orange-smooth);
+  color: var(--red-smooth);
+}

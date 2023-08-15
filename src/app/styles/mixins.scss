@@ -1,0 +1,19 @@
+@use './breakpoints.scss' as *;
+
+@mixin responsive($media...) {
+  @each $value in $media {
+    @if $value == breakpoint-xl {
+      @media only screen and (min-width: ($breakpoint-xl)) {
+        @content;
+      }
+    } @else if $value == breakpoint-lg {
+      @media only screen and (min-width: ($breakpoint-lg)) and (max-width: ($breakpoint-xl - 1px)) {
+        @content;
+      }
+    } @else if $value == breakpoint-xs {
+      @media only screen and (min-width: ($breakpoint-xs)) and (max-width: ($breakpoint-lg - 1px)) {
+        @content;
+      }
+    }
+  }
+}
