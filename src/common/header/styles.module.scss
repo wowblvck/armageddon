@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.title {
+  margin: 0;
+}
+
+.link {
+  text-transform: uppercase;
+  font-family: var(--font-passion-one);
+  font-size: 32px;
+  line-height: normal;
+  color: var(--orange-base);
+  text-decoration: none;
+}
+
+.description {
+  margin: 0;
+  width: 375px;
+  font-family: var(--font-helvetica);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--white-base);
+}
