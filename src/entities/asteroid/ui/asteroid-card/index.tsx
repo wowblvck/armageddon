@@ -1,42 +1,50 @@
-import { convertedUnit, extractValueInBrackets, formatDate } from '@shared/utils';
+import { useUnit } from '@/features/asteroids-unit-filter';
 import arrowIcon from '@public/icons/arrow.svg';
 import bigIcon from '@public/icons/asteroids/big.png';
 import smallIcon from '@public/icons/asteroids/small.png';
 import warningIcon from '@public/icons/warning.svg';
-import Image from 'next/image';
-import React from 'react';
 import { NearEarthObject } from '@shared/api';
-import { AsteroidsUnitValue } from '@features/asteroids-unit-filter';
-import styles from './styles.module.scss';
 import { Button } from '@shared/ui/button';
+import { convertedUnit, extractValueInBrackets, formatDate } from '@shared/utils';
+import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
+import styles from './styles.module.scss';
 
 export type AsteroidCardProps = {
-  unit: AsteroidsUnitValue;
   item: NearEarthObject;
   inCart?: boolean;
 };
 
-export const AsteroidCard: React.FC<AsteroidCardProps> = ({ unit, item, inCart }) => {
-  const { close_approach_data, estimated_diameter, name, is_potentially_hazardous_asteroid, id } =
-    item;
+export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, inCart }) => {
+  const { unitValue } = useUnit();
+
   const {
-    meters: { estimated_diameter_max, estimated_diameter_min },
-  } = estimated_diameter;
+    close_approach_data,
+    estimated_diameter: {
+      meters: { estimated_diameter_min, estimated_diameter_max },
+    },
+    name,
+    is_potentially_hazardous_asteroid,
+    id,
+  } = item;
 
   const averageDiameter = (estimated_diameter_min + estimated_diameter_max) / 2;
 
-  const missDistanceValue = close_approach_data.find((data) => data.orbiting_body === 'Earth')
-    ?.miss_distance[unit];
+  const missDistanceValue = Math.trunc(
+    Number(
+      close_approach_data.find((data) => data.orbiting_body === 'Earth')?.miss_distance[unitValue]
+    )
+  );
+
+  const convertedDistance = convertedUnit(unitValue, missDistanceValue);
 
   return (
     <div className={styles.container}>
       <p className={styles.date}>{formatDate(close_approach_data[0].close_approach_date)}</p>
       <div className={styles.description}>
         <div className={styles['distance-container']}>
-          <p className={styles['distance-title']}>
-            {missDistanceValue ? convertedUnit(unit, parseInt(missDistanceValue)) : 'Неизвестно'}
-          </p>
+          <p className={styles['distance-title']}>{convertedDistance}</p>
           <Image fill className={styles.arrow} src={arrowIcon} alt="Distance" />
         </div>
         <Image src={averageDiameter > 150 ? smallIcon : bigIcon} alt="Asteroid" />

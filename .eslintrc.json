@@ -1,4 +1,13 @@
 {
   "extends": ["next", "plugin:prettier/recommended"],
-  "plugins": ["prettier"]
+  "plugins": ["prettier"],
+  "rules": {
+    "import/no-cycle": [
+      "error",
+      {
+        "maxDepth": 10,
+        "ignoreExternal": true
+      }
+    ]
+  }
 }
