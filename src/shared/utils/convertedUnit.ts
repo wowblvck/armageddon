@@ -1,7 +1,7 @@
-import { UnitValue } from '@/features/Asteroids/unit-selector/unit-selector.interface';
+import { AsteroidsUnitValue } from '@features/asteroids-unit-filter';
 import { declension, numberWithSpaces } from '@shared/utils';
 
-export const convertedUnit = (unit: UnitValue, value: number) => {
+export const convertedUnit = (unit: AsteroidsUnitValue, value: number) => {
   switch (unit) {
     case 'kilometers':
       return `${numberWithSpaces(value)} км`;
