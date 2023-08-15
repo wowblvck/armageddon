@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { asteroidsUnits } from './config';
-import { useUnit } from './store';
+import { useUnit } from './model';
 import styles from './styles.module.scss';
 
 export const AsteroidsUnitFilter = () => {

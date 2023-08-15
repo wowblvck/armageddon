@@ -1,5 +1,10 @@
 import { create } from 'zustand';
-import { AsteroidsUnitState } from '../config';
+import { AsteroidsUnitValue } from '../config';
+
+export interface AsteroidsUnitState {
+  unitValue: AsteroidsUnitValue;
+  setUnitValue: (value: AsteroidsUnitValue) => void;
+}
 
 export const useUnit = create<AsteroidsUnitState>((set) => ({
   unitValue: 'kilometers',

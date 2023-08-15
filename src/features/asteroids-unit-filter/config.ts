@@ -12,8 +12,3 @@ export const asteroidsUnits: AsteroidsUnitOptions[] = [
   { id: 1, value: 'kilometers', label: 'в километрах' },
   { id: 2, value: 'lunar', label: 'в лунных орбитах' },
 ];
-
-export interface AsteroidsUnitState {
-  unitValue: AsteroidsUnitValue;
-  setUnitValue: (value: AsteroidsUnitValue) => void;
-}

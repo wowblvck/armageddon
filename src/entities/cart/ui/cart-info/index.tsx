@@ -1,10 +1,13 @@
+'use client';
+
 import { declension } from '@shared/utils';
 import { Button } from '@shared/ui/button';
 import styles from './styles.module.scss';
 import Link from 'next/link';
+import { useCart } from '../../model';
 
 export const CartInfo = () => {
-  const count = 2;
+  const { count } = useCart();
 
   const currentValue = declension(count, ['астероид', 'астероида', 'астероидов']);
 
