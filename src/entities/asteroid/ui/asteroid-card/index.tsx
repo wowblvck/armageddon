@@ -1,15 +1,15 @@
-import { useUnit } from '@/features/asteroids-unit-filter';
+import { useUnit } from '@features/asteroids-unit-filter';
 import arrowIcon from '@public/icons/arrow.svg';
 import bigIcon from '@public/icons/asteroids/big.png';
 import smallIcon from '@public/icons/asteroids/small.png';
 import warningIcon from '@public/icons/warning.svg';
 import { NearEarthObject } from '@shared/api';
-import { Button } from '@shared/ui/button';
 import { convertedUnit, extractValueInBrackets, formatDate } from '@shared/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import styles from './styles.module.scss';
+import AddOrRemoveFromCart from '@/features/add-to-cart/ui';
 
 export type AsteroidCardProps = {
   item: NearEarthObject;
@@ -56,11 +56,7 @@ export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, inCart }) => {
         </div>
       </div>
       <div className={styles['order-container']}>
-        {!inCart && (
-          <Button size="small" variant="order">
-            Заказать
-          </Button>
-        )}
+        {!inCart && <AddOrRemoveFromCart item={item} />}
 
         {is_potentially_hazardous_asteroid && (
           <div className={styles['dangerous-container']}>

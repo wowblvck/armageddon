@@ -1,3 +1,3 @@
 export * from './ui';
 export * from './config';
-export * from './store';
+export * from './model';
