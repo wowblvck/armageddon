@@ -1,14 +1,17 @@
 import { AsteroidsUnitValue } from '@features/asteroids-unit-filter';
-import { declension, numberWithSpaces } from '@shared/utils';
+import { declension } from './declension';
+import { numberWithSpaces } from './numberWithSpaces';
 
 export const convertedUnit = (unit: AsteroidsUnitValue, value: number) => {
+  const valueWithSpaces = numberWithSpaces(value);
+
   switch (unit) {
     case 'kilometers':
-      return `${numberWithSpaces(value)} км`;
+      return `${valueWithSpaces} км`;
     case 'lunar':
-      const lunarOrbits = declension(value, ['лунная орбита', 'лунные орбиты', 'лунных орбит']);
-      return `${numberWithSpaces(value)} ${lunarOrbits}`;
+      const lunarDeclension = declension(value, ['лунная орбита', 'лунные орбиты', 'лунных орбит']);
+      return `${valueWithSpaces} ${lunarDeclension}`;
     default:
-      return '';
+      return 'Неизвестно';
   }
 };

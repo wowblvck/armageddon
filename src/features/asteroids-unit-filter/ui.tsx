@@ -1,23 +1,13 @@
-import styles from './styles.module.scss';
+'use client';
+
 import classNames from 'classnames';
-import { AsteroidsUnitValue, asteroidsUnits } from './config';
 import React from 'react';
+import { asteroidsUnits } from './config';
+import { useUnit } from './store';
+import styles from './styles.module.scss';
 
-type AsteroidsUnitFilterProps = {
-  value: AsteroidsUnitValue;
-  onUnitChange: (newUnit: AsteroidsUnitValue) => void;
-};
-
-export const AsteroidsUnitFilter: React.FC<AsteroidsUnitFilterProps> = ({
-  value,
-  onUnitChange,
-}) => {
-  const handleClick = React.useCallback(
-    (selectedUnit: AsteroidsUnitValue) => {
-      onUnitChange(selectedUnit);
-    },
-    [onUnitChange]
-  );
+export const AsteroidsUnitFilter = () => {
+  const { unitValue, setUnitValue } = useUnit();
 
   return (
     <ul className={styles['values-container']}>
@@ -25,8 +15,8 @@ export const AsteroidsUnitFilter: React.FC<AsteroidsUnitFilterProps> = ({
         <React.Fragment key={unit.id}>
           <li>
             <button
-              className={classNames(styles.unit, { [styles.active]: value === unit.value })}
-              onClick={() => handleClick(unit.value)}
+              className={classNames(styles.unit, { [styles.active]: unitValue === unit.value })}
+              onClick={() => setUnitValue(unit.value)}
             >
               {unit.label}
             </button>

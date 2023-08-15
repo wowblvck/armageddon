@@ -1,14 +1,11 @@
-import React from 'react';
-import styles from './styles.module.scss';
-import { AsteroidsUnitValue } from '@features/asteroids-unit-filter';
+'use client';
+
 import { NEOFeed, NearEarthObject } from '@shared/api';
-import { AsteroidCard } from '..';
+import React from 'react';
+import { AsteroidCard } from '../asteroid-card';
+import styles from './styles.module.scss';
 
-type AsteroidsListProps = {
-  unit: AsteroidsUnitValue;
-};
-
-export const AsteroidList: React.FC<AsteroidsListProps> = ({ unit }) => {
+export const AsteroidList = () => {
   const [asteroids, setAsteroids] = React.useState<NearEarthObject[]>([]);
 
   React.useEffect(() => {
@@ -29,7 +26,7 @@ export const AsteroidList: React.FC<AsteroidsListProps> = ({ unit }) => {
     <ul className={styles.list}>
       {asteroids.map((asteroid) => (
         <li key={asteroid.id}>
-          <AsteroidCard unit={unit} item={asteroid} />
+          <AsteroidCard item={asteroid} />
         </li>
       ))}
     </ul>
