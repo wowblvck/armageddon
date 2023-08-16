@@ -39,9 +39,7 @@ export interface CloseApproachData {
 }
 
 export interface NearEarthObject {
-  links: {
-    self: string;
-  };
+  links: Pick<Links, 'self'>;
   id: string;
   neo_reference_id: string;
   name: string;
