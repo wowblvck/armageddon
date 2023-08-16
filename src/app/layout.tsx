@@ -6,6 +6,7 @@ import styles from './styles/layout.module.scss';
 import { Header } from '@common/header';
 import { Footer } from '@common/footer';
 import Providers from './providers';
+import Head from 'next/head';
 
 const passionOne = Passion_One({
   weight: ['400'],
@@ -43,6 +44,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className={`${passionOne.variable} ${helvetica.variable}`}>
+      <Head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      </Head>
       <body>
         <Header />
         <Providers>
