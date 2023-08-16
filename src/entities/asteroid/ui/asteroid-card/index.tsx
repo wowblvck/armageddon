@@ -31,17 +31,16 @@ export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, inCart }) => {
 
   const averageDiameter = (estimated_diameter_min + estimated_diameter_max) / 2;
 
-  const missDistanceValue = Math.trunc(
-    Number(
-      close_approach_data.find((data) => data.orbiting_body === 'Earth')?.miss_distance[unitValue]
-    )
-  );
+  const approachDistance = close_approach_data[0].miss_distance;
+  const approachDate = close_approach_data[0].close_approach_date;
+
+  const missDistanceValue = Math.trunc(Number(approachDistance[unitValue]));
 
   const convertedDistance = convertedUnit(unitValue, missDistanceValue);
 
   return (
     <div className={styles.container}>
-      <p className={styles.date}>{formatDate(close_approach_data[0].close_approach_date)}</p>
+      <p className={styles.date}>{formatDate(approachDate)}</p>
       <div className={styles.description}>
         <div className={styles['distance-container']}>
           <p className={styles['distance-title']}>{convertedDistance}</p>

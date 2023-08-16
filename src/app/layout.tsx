@@ -5,6 +5,7 @@ import './styles/index.scss';
 import styles from './styles/layout.module.scss';
 import { Header } from '@common/header';
 import { Footer } from '@common/footer';
+import Providers from './providers';
 
 const passionOne = Passion_One({
   weight: ['400'],
@@ -44,7 +45,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru" className={`${passionOne.variable} ${helvetica.variable}`}>
       <body>
         <Header />
-        <main className={styles.main}>{children}</main>
+        <Providers>
+          <main className={styles.main}>{children}</main>
+        </Providers>
         <Footer />
       </body>
     </html>
