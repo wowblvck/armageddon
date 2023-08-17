@@ -10,9 +10,9 @@ import { useInView } from 'react-intersection-observer';
 import styles from './styles.module.scss';
 
 const AsteroidsPage = () => {
-  const { ref, inView } = useInView({ threshold: 1 });
+  const { ref, inView } = useInView({ root: null, threshold: 1 });
 
-  const { items, isLoading, loadMore } = useAsteroidsQuery();
+  const { items, isLoading, hasMore, loadMore, isError, error } = useAsteroidsQuery();
 
   React.useEffect(() => {
     if (inView) {
@@ -28,8 +28,10 @@ const AsteroidsPage = () => {
           <AsteroidsUnitFilter />
         </div>
 
-        {items && <AsteroidList items={items} />}
-        {isLoading ? <Spin className={styles.spin} /> : <div ref={ref} />}
+        {!!items.length && <AsteroidList items={items} innerRef={ref} />}
+        {isLoading && <Spin className={styles.spin} />}
+        {!hasMore && <p className={styles.error}>Больше нечего тебе показать :(</p>}
+        {isError && error && <p className={styles.error}>{error.message}</p>}
       </section>
       <section>
         <CartInfo />

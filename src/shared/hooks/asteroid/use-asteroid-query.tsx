@@ -1,33 +1,44 @@
+import { NearEarthObject, nasaApi } from '@/shared/api';
 import { useQuery } from '@tanstack/react-query';
 import moment, { Moment } from 'moment';
-import { NearEarthObject, nasaApi } from '@/shared/api';
 import React from 'react';
 
-export const useAsteroidsQuery = (initialDate?: Moment) => {
+type UseAsteroidsQueryReturn = {
+  date: Moment;
+  items: NearEarthObject[];
+  isLoading?: boolean;
+  isFetching?: boolean;
+  isError?: boolean;
+  hasMore: boolean;
+  loadMore: () => void;
+  error: Error | null;
+};
+
+export const useAsteroidsQuery = (initialDate?: Moment): UseAsteroidsQueryReturn => {
   const currentDate = moment();
-
   const [date, setDate] = React.useState(initialDate || currentDate);
-
+  const [hasMoreData, setHasMoreData] = React.useState(true);
   const [items, setItems] = React.useState<NearEarthObject[]>([]);
 
   const {
     data: asteroids,
     isLoading,
     isFetching,
-  } = useQuery({
+    isError,
+    error,
+  } = useQuery<NearEarthObject[], Error>({
     queryKey: ['asteroids', date],
-    queryFn: async () => {
-      const response = await nasaApi.asteroids.getAsteroidsList({
+    queryFn: () =>
+      nasaApi.asteroids.getAsteroidsList({
         start_date: date.format('YYYY-MM-DD'),
         end_date: date.format('YYYY-MM-DD'),
-      });
-      return response;
-    },
+      }),
   });
 
   React.useEffect(() => {
     if (asteroids) {
       setItems((prevItems) => [...prevItems, ...asteroids]);
+      setHasMoreData(asteroids.length > 0);
     }
   }, [asteroids]);
 
@@ -38,9 +49,12 @@ export const useAsteroidsQuery = (initialDate?: Moment) => {
 
   return {
     date,
+    error,
     items,
+    hasMore: hasMoreData,
     isLoading,
     isFetching,
+    isError,
     loadMore,
   };
 };
