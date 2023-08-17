@@ -60,3 +60,10 @@ export interface NEOFeed {
   element_count: number;
   near_earth_objects: NearEarthObjects;
 }
+
+export interface NasaError {
+  code: number;
+  http_error: string;
+  error_message: string;
+  request: string;
+}
