@@ -1,15 +1,39 @@
 import { create } from 'zustand';
-import { AsteroidsUnitValue } from '../config';
+import {
+  DEFAULT_DIAMETER_VALUE,
+  DEFAULT_DISTANCE_VALUE,
+  DEFAULT_VELOCITY_VALUE,
+  UnitsByType,
+  UnitsByTypeKey,
+} from '../config';
 
-export interface AsteroidsUnitState {
-  unitValue: AsteroidsUnitValue;
-  setUnitValue: (value: AsteroidsUnitValue) => void;
-}
+type State = {
+  unitValue: {
+    [key in UnitsByTypeKey]: UnitsByType[key];
+  };
+};
 
-export const useUnit = create<AsteroidsUnitState>((set) => ({
-  unitValue: 'kilometers',
-  setUnitValue: (value) =>
-    set(() => ({
-      unitValue: value,
+type Actions = {
+  setUnitValue: <T extends UnitsByTypeKey>(type: T, value: UnitsByType[T]) => void;
+  reset: () => void;
+};
+
+const initialState: State = {
+  unitValue: {
+    velocity: DEFAULT_VELOCITY_VALUE,
+    distance: DEFAULT_DISTANCE_VALUE,
+    diameter: DEFAULT_DIAMETER_VALUE,
+  },
+};
+
+export const useUnit = create<State & Actions>((set) => ({
+  ...initialState,
+  setUnitValue: (type, value) =>
+    set((state) => ({
+      unitValue: {
+        ...state.unitValue,
+        [type]: value,
+      },
     })),
+  reset: () => set(initialState),
 }));
