@@ -1,27 +1,41 @@
 'use client';
 
+import { UnitsByType, UnitsByTypeKey } from './config';
+import styles from './styles.module.scss';
+import { asteroidsUnits } from './config';
 import classNames from 'classnames';
 import React from 'react';
-import { asteroidsUnits } from './config';
 import { useUnit } from './model';
-import styles from './styles.module.scss';
 
-export const AsteroidsUnitFilter = () => {
+type AsteroidsUnitFilterProps<T extends UnitsByTypeKey> = {
+  type: T;
+  units: UnitsByType[T][];
+};
+
+export const AsteroidsUnitFilter = <T extends UnitsByTypeKey>({
+  type,
+  units,
+}: AsteroidsUnitFilterProps<T>) => {
   const { unitValue, setUnitValue } = useUnit();
 
+  const filteredUnits = units
+    ? asteroidsUnits[type].filter((unit) => units.includes(unit.value))
+    : asteroidsUnits[type];
   return (
     <ul className={styles['values-container']}>
-      {asteroidsUnits.map((unit, idx) => (
+      {filteredUnits.map((unit, idx) => (
         <React.Fragment key={unit.id}>
           <li>
             <button
-              className={classNames(styles.unit, { [styles.active]: unitValue === unit.value })}
-              onClick={() => setUnitValue(unit.value)}
+              className={classNames(styles.unit, {
+                [styles.active]: unitValue[type] === unit.value,
+              })}
+              onClick={() => setUnitValue(type, unit.value)}
             >
               {unit.label}
             </button>
           </li>
-          {idx !== asteroidsUnits.length - 1 && <hr className={styles.hr} />}
+          {idx !== filteredUnits.length - 1 && <hr className={styles.hr} />}
         </React.Fragment>
       ))}
     </ul>
