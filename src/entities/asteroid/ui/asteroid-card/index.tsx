@@ -15,10 +15,10 @@ import styles from './styles.module.scss';
 
 export type AsteroidCardProps = {
   item: NearEarthObject;
-  inCart?: boolean;
+  showOrderButton: boolean;
 };
 
-export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, inCart }) => {
+export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, showOrderButton }) => {
   const { unitValue } = useUnit();
 
   const {
@@ -59,7 +59,7 @@ export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, inCart }) => {
         </div>
       </div>
       <div className={styles['order-container']}>
-        {!inCart && <AddOrRemoveFromCart item={item} />}
+        {showOrderButton && <AddOrRemoveFromCart item={item} />}
 
         {is_potentially_hazardous_asteroid && <DangerousAlert />}
       </div>
