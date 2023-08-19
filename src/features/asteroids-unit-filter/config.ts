@@ -67,7 +67,7 @@ export const asteroidsUnits: UnitOptions = {
     {
       id: 1,
       value: 'kilometers_per_hour',
-      label: 'в км/час',
+      label: 'в км/ч',
     },
     {
       id: 2,

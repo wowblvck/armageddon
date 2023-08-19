@@ -1,0 +1,13 @@
+.dangerous-container {
+  display: flex;
+  align-items: center;
+}
+
+.dangerous {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--gray-30);
+}

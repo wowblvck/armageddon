@@ -25,7 +25,7 @@ const AsteroidsPage = () => {
       <section className={styles.container}>
         <div className={styles['title-container']}>
           <h2 className={styles.title}>Ближайшие подлёты астероидов</h2>
-          <AsteroidsUnitFilter />
+          <AsteroidsUnitFilter type="distance" units={['kilometers', 'lunar']} />
         </div>
 
         {!!items.length && <AsteroidList items={items} innerRef={ref} />}

@@ -12,7 +12,7 @@ function CartPage() {
     return () => {
       reset();
     };
-  }, [reset]);
+  }, []);
 
   const sortItems = items.sort((a, b) =>
     a.close_approach_data[0].close_approach_date > b.close_approach_data[0].close_approach_date
