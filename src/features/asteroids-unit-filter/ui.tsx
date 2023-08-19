@@ -2,7 +2,7 @@
 
 import { UnitsByType, UnitsByTypeKey } from './config';
 import styles from './styles.module.scss';
-import { asteroidsUnits } from './config';
+import { asteroidsUnits, defaultUnitValues } from './config';
 import classNames from 'classnames';
 import React from 'react';
 import { useUnit } from './model';
@@ -21,6 +21,15 @@ export const AsteroidsUnitFilter = <T extends UnitsByTypeKey>({
   const filteredUnits = units
     ? asteroidsUnits[type].filter((unit) => units.includes(unit.value))
     : asteroidsUnits[type];
+
+  const defaultUnitIndex = filteredUnits.findIndex(
+    (unit) => unit.value === defaultUnitValues[type]
+  );
+  if (defaultUnitIndex !== -1) {
+    const defaultUnit = filteredUnits.splice(defaultUnitIndex, 1);
+    filteredUnits.unshift(...defaultUnit);
+  }
+
   return (
     <ul className={styles['values-container']}>
       {filteredUnits.map((unit, idx) => (
