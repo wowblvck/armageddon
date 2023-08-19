@@ -82,6 +82,8 @@ export const asteroidsUnits: UnitOptions = {
   ],
 };
 
-export const DEFAULT_DIAMETER_VALUE: keyof EstimatedDiameter = 'kilometers';
-export const DEFAULT_VELOCITY_VALUE: keyof RelativeVelocity = 'kilometers_per_hour';
-export const DEFAULT_DISTANCE_VALUE: keyof MissDistance = 'kilometers';
+export const defaultUnitValues: UnitsByType = {
+  diameter: 'meters',
+  distance: 'kilometers',
+  velocity: 'kilometers_per_hour',
+};
