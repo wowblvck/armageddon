@@ -1,15 +1,17 @@
+import { DEFAULT_BIG_SIZE, DEFAULT_DIAMETER_UNIT } from '@entities/asteroid/config';
+import AddOrRemoveFromCart from '@features/add-to-cart/ui';
 import { useUnit } from '@features/asteroids-unit-filter';
+import { UnitConverter } from '@features/asteroids-unit-filter/helpers';
 import arrowIcon from '@public/icons/arrow.svg';
-import bigIcon from '@public/icons/asteroids/big.png';
-import smallIcon from '@public/icons/asteroids/small.png';
-import warningIcon from '@public/icons/warning.svg';
 import { NearEarthObject } from '@shared/api';
-import { convertedUnit, extractValueInBrackets, formatDate } from '@shared/utils';
+import AsteroidSizeIcon from '@shared/ui/asteroid-size-icon';
+import DangerousAlert from '@shared/ui/dangerous-alert';
+import { convertToMeters, extractValueInBrackets, formatDate } from '@shared/utils';
+import calculateAverage from '@shared/utils/calculateAverage';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import styles from './styles.module.scss';
-import AddOrRemoveFromCart from '@/features/add-to-cart/ui';
 
 export type AsteroidCardProps = {
   item: NearEarthObject;
@@ -22,21 +24,23 @@ export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, inCart }) => {
   const {
     close_approach_data,
     estimated_diameter: {
-      meters: { estimated_diameter_min, estimated_diameter_max },
+      [DEFAULT_DIAMETER_UNIT]: { estimated_diameter_min, estimated_diameter_max },
     },
     name,
     is_potentially_hazardous_asteroid,
     id,
   } = item;
 
-  const averageDiameter = (estimated_diameter_min + estimated_diameter_max) / 2;
+  const averageDiameter = calculateAverage(estimated_diameter_min, estimated_diameter_max);
+  const convertToM = convertToMeters(averageDiameter, DEFAULT_DIAMETER_UNIT);
+  const diameter = new UnitConverter('diameter', [DEFAULT_DIAMETER_UNIT]);
+  const convertedDiameter = diameter.convertValue([averageDiameter]);
 
-  const approachDistance = close_approach_data[0].miss_distance;
   const approachDate = close_approach_data[0].close_approach_date;
 
-  const missDistanceValue = Math.trunc(Number(approachDistance[unitValue]));
-
-  const convertedDistance = convertedUnit(unitValue, missDistanceValue);
+  const approachDistance = Number(close_approach_data[0].miss_distance[unitValue.distance]);
+  const distance = new UnitConverter('distance', [unitValue.distance]);
+  const convertedDistance = distance.convertValue([approachDistance]);
 
   return (
     <div className={styles.container}>
@@ -46,23 +50,18 @@ export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, inCart }) => {
           <p className={styles['distance-title']}>{convertedDistance}</p>
           <Image fill className={styles.arrow} src={arrowIcon} alt="Distance" />
         </div>
-        <Image src={averageDiameter > 150 ? smallIcon : bigIcon} alt="Asteroid" />
+        <AsteroidSizeIcon value={convertToM} bigSize={DEFAULT_BIG_SIZE} />
         <div className={styles['label-container']}>
           <Link className={styles.label} href={`/asteroid/${id}`}>
             {extractValueInBrackets(name)}
           </Link>
-          <p className={styles.diameter}>Ø {averageDiameter.toFixed()} м</p>
+          <p className={styles.diameter}>Ø {convertedDiameter}</p>
         </div>
       </div>
       <div className={styles['order-container']}>
         {!inCart && <AddOrRemoveFromCart item={item} />}
 
-        {is_potentially_hazardous_asteroid && (
-          <div className={styles['dangerous-container']}>
-            <Image src={warningIcon} alt="Опасный астероид" />
-            <p className={styles.dangerous}>&nbsp;Опасен</p>
-          </div>
-        )}
+        {is_potentially_hazardous_asteroid && <DangerousAlert />}
       </div>
     </div>
   );

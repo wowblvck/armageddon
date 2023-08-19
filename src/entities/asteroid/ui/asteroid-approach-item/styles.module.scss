@@ -1,0 +1,37 @@
+.summary {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--white-base);
+}
+
+.label {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--white-base);
+
+  span {
+    font-weight: 400;
+  }
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 0 0 15px;
+}
+
+.details {
+  cursor: pointer;
+  background-color: #232526;
+  border-radius: 24px;
+  padding: 15px;
+  border-radius: 10px;
+}

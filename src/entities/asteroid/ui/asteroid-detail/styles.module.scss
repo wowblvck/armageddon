@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--white-base);
+}
+
+.approach-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.data-label {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--white-base);
+}
+
+.data-subcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.data-title {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--white-base);
+}
+
+.diameter-description {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
