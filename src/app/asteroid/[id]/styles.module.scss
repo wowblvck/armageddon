@@ -1,0 +1,55 @@
+@use '@styles/mixins' as mix;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 402px;
+
+  @include mix.responsive(breakpoint-xs) {
+    width: 279px;
+  }
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 36px;
+  color: var(--white-base);
+}
+
+.spin {
+  align-self: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.error {
+  margin: 20px 0;
+  font-family: var(--font-helvetica);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 0;
+  color: var(--white-base);
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.diameter {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-weight: 400;
+  font-size: 18px;
+}

@@ -1,6 +1,6 @@
+import { isAxiosError } from 'axios';
 import { apiInstance } from './base';
-import type { NEOFeed, NasaError, NearEarthObject } from './models';
-import { AxiosPromise, isAxiosError } from 'axios';
+import type { NEOFeed, NearEarthObject } from './models';
 
 const FEED_URL = `/feed`;
 const NEO_URL = `/neo`;
@@ -39,6 +39,11 @@ export const getAsteroidsList = async (
   }
 };
 
-export const getAsteroidById = (asteroidId: string): AxiosPromise<NearEarthObject> => {
-  return apiInstance.get(`${NEO_URL}/${asteroidId}`);
+export const getAsteroidById = async (asteroidId: string): Promise<NearEarthObject> => {
+  try {
+    const { data } = await apiInstance.get<NearEarthObject>(`${NEO_URL}/${asteroidId}`);
+    return data;
+  } catch (error) {
+    throw new Error('Произошла неизвестная ошибка!');
+  }
 };
