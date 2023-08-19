@@ -28,7 +28,7 @@ const AsteroidsPage = () => {
           <AsteroidsUnitFilter type="distance" units={['kilometers', 'lunar']} />
         </div>
 
-        {!!items.length && <AsteroidList items={items} innerRef={ref} />}
+        {!!items.length && <AsteroidList items={items} innerRef={ref} showOrderButton={true} />}
         {isLoading && <Spin className={styles.spin} />}
         {!hasMore && <p className={styles.error}>Больше нечего тебе показать :(</p>}
         {isError && error && <p className={styles.error}>{error.message}</p>}

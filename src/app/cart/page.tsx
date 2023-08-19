@@ -29,7 +29,7 @@ function CartPage() {
           {count > 0 ? 'Заказ отправлен!' : 'В корзине ничего нет :('}
         </h2>
       </div>
-      <AsteroidList items={sortItems} inCart={true} />
+      <AsteroidList items={sortItems} showOrderButton={false} />
     </section>
   );
 }

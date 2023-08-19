@@ -8,15 +8,15 @@ import styles from './styles.module.scss';
 type AsteroidListProps = {
   items: NearEarthObject[];
   innerRef?: React.LegacyRef<HTMLLIElement>;
-  inCart?: boolean;
+  showOrderButton: boolean;
 };
 
-export const AsteroidList: React.FC<AsteroidListProps> = ({ items, inCart, innerRef }) => {
+export const AsteroidList: React.FC<AsteroidListProps> = ({ items, showOrderButton, innerRef }) => {
   return (
     <ul className={styles.list}>
       {items.map((asteroid, idx) => (
         <li key={asteroid.id} ref={idx === items.length - 1 ? innerRef : undefined}>
-          <AsteroidCard item={asteroid} inCart={inCart} />
+          <AsteroidCard item={asteroid} showOrderButton={showOrderButton} />
         </li>
       ))}
     </ul>
