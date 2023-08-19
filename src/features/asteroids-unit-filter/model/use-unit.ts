@@ -1,11 +1,5 @@
 import { create } from 'zustand';
-import {
-  DEFAULT_DIAMETER_VALUE,
-  DEFAULT_DISTANCE_VALUE,
-  DEFAULT_VELOCITY_VALUE,
-  UnitsByType,
-  UnitsByTypeKey,
-} from '../config';
+import { defaultUnitValues, UnitsByType, UnitsByTypeKey } from '../config';
 
 type State = {
   unitValue: {
@@ -20,9 +14,9 @@ type Actions = {
 
 const initialState: State = {
   unitValue: {
-    velocity: DEFAULT_VELOCITY_VALUE,
-    distance: DEFAULT_DISTANCE_VALUE,
-    diameter: DEFAULT_DIAMETER_VALUE,
+    velocity: defaultUnitValues.velocity,
+    distance: defaultUnitValues.distance,
+    diameter: defaultUnitValues.diameter,
   },
 };
 
