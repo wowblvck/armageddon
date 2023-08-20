@@ -92,7 +92,7 @@ export class UnitConverter<T extends UnitsByTypeKey, U extends UnitsByType[T]>
       return conversionFunction.call(this, unit, result);
     }
 
-    return 'Unknown measurement type';
+    return 'Неизвестный тип единиц измерения';
   }
 
   public convertValue(values: number[]) {
