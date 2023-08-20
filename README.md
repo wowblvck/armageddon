@@ -94,16 +94,17 @@
 
 ## Настройка приложения
 
-1. Для корректной работы приложения необходимо указать переменные среды. Название переменных указаны в файле-примере [.env.local.example](./.env.local.example).
-2. Для работы приложения необходимо получить ключ на сайте [NASA API](https://api.nasa.gov/).
-3. Файл `.env.local`
+1. Для корректной работы приложения необходимо указать переменные среды. Название переменных указаны в файле [.env.local.example](./.env.local.example).
+2. Файл `.env.local` располагается в корневом разделе приложения.
+3. Для работы приложения необходимо получить ключ на сайте [NASA API](https://api.nasa.gov/).
+4. Описание файла `.env.local`
 
 ```
 NEXT_PUBLIC_BASE_URL="PUT BASE NASA URL HERE"
 NEXT_PUBLIC_API_KEY="PUT API URL HERE"
 ```
 
-4. Для обхода ограничений CORS можно использовать URL CORS Anywhere. Для этого необходимо вставить URL сервиса CORS Anywhere перед URL API NASA. В качестве работающего сервиса указан личный сервис CORS Anywhere.
+5. Для обхода ограничений CORS можно использовать URL CORS Anywhere. Для этого необходимо вставить URL сервиса CORS Anywhere перед URL API NASA. В качестве работающего сервиса указан личный сервис CORS Anywhere.
 
 ```
 NEXT_PUBLIC_BASE_URL=https://important-crab-cardigan.cyclic.app/api.nasa.gov/neo/rest/v1
@@ -114,6 +115,19 @@ NEXT_PUBLIC_BASE_URL=https://important-crab-cardigan.cyclic.app/api.nasa.gov/neo
 1. Для работы приложения требуется NodeJS версии `>= 18.17`
 2. Для запуска приложения в режиме разработчика использовать `npm run dev`
 3. Для сборки использовать `npm run build`
+
+## Запуск Docker
+
+> ВАЖНО: перед запуском убедитесь, что у Вас установлен [Docker](https://docs.docker.com/engine/install/), а также [Docker Compose](https://docs.docker.com/compose/gettingstarted/)
+
+1. Для запуска Docker-контейнера, необходимо в корневом разделе создать файл `.env.production` с ключами, указанными в разделе `Настройка приложения`.
+2. Для запуска сборки Docker-контейнера выполните следующую команду:
+
+```
+docker-compose up -d
+```
+
+3. Docker-контейнер запустится в фоновом режиме.
 
 ---
 
