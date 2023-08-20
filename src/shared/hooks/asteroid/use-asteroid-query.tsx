@@ -4,7 +4,6 @@ import moment, { Moment } from 'moment';
 import React from 'react';
 
 type UseAsteroidsQueryReturn = {
-  date: Moment;
   items: NearEarthObject[];
   isLoading?: boolean;
   isFetching?: boolean;
@@ -48,7 +47,6 @@ export const useAsteroidsQuery = (initialDate?: Moment): UseAsteroidsQueryReturn
   };
 
   return {
-    date,
     error,
     items,
     hasMore: hasMoreData,
