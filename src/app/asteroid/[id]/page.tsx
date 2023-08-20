@@ -19,7 +19,7 @@ type AsteroidDetailPageProps = {
 };
 
 function AsteroidDetailPage({ params: { id } }: AsteroidDetailPageProps) {
-  const { unitValue, reset } = useUnit();
+  const { reset } = useUnit();
 
   const { data: asteroid, isLoading } = useQuery<NearEarthObject>({
     queryKey: ['asteroid', id],
