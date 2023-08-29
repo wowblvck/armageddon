@@ -226,3 +226,25 @@ console.log(converted); //Output: "Венера"
 ```
 
 </details>
+
+<details>
+  <summary><a href="../src/shared/utils/findNearestDate.ts">findNearestDate</a></summary>
+
+> Назначение: среди массива дат находит ближайшую к указанной дате 
+#### Аргументы
+
+```
+arrayOfDates: string - массив дат
+findDate: string - дата, относительно которой производится поиск 
+```
+
+### Использование
+
+```
+const dates = ['2020-01-12', '2021-02-16', '2022-07-18', '2023-08-23'];
+const findDate = '2023-07-18';
+
+findNearestDate(dates, findDate); //Output: "2023-08-23"
+```
+
+</details>

@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--white-base);
+}
+
+.message {
+  margin: 0;
+  font-family: var(--font-helvetica);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--white-base);
+}

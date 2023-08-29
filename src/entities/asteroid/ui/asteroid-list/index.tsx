@@ -1,12 +1,10 @@
-'use client';
-
-import { NearEarthObject } from '@shared/api';
+import { type NearEarthObjectFull } from '@shared/api';
 import React from 'react';
 import { AsteroidCard } from '../asteroid-card';
 import styles from './styles.module.scss';
 
 type AsteroidListProps = {
-  items: NearEarthObject[];
+  items: NearEarthObjectFull[];
   innerRef?: React.LegacyRef<HTMLLIElement>;
   showOrderButton: boolean;
 };

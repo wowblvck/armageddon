@@ -8,13 +8,14 @@
 #### Аргументы
 
 ```
-initialDate?: Moment - дата, от начала которой требуется получить информацию об астероидах. Если дата не указана, будет принята текущая дата пользователя
+initialData?: NearEarthObjectFull[] - исходный массив астероидов (необходим для предварительного рендеринга, например, для SSR)
+initialDate?: string - дата, от начала которой требуется получить информацию об астероидах. Если дата не указана, будет принята текущая дата пользователя
 ```
 
 ### Возвращает
 
 ```
-items: NearEarthObject[] - массив астероидов
+items: NearEarthObjectFull[] - массив астероидов
 isLoading?: boolean - статус загрузки
 isFetching?: boolean - статус получения
 isError?: boolean - статус ошибки
@@ -25,7 +26,7 @@ error: Error | null - строка с ошибкой, если такая воз
 
 ### Использование
 
-См. [AsteroidsPage](../src/app/page.tsx)
+См. [AsteroidsPage](../src/entities/asteroid/ui/asteroids/index.tsx)
 
 </details>
 
@@ -56,9 +57,9 @@ reset: () - привести все фильтры к значению по-ум
 ### Возвращает
 
 ```
-items: NearEarthObject[] - массив астероидов в корзине
+items: NearEarthObjectFull[] - массив астероидов в корзине
 count: number - количество элементов в корзине
-addToCart: (item: NearEarthObject) - добавить астероид в корзину
+addToCart: (item: NearEarthObjectFull) - добавить астероид в корзину
 removeFromCart: (id: number) - удалить астероид из корзины по его ID
 reset: () - удалить все элементы из корзины и сбросить счётчик
 ```

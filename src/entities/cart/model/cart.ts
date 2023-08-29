@@ -1,14 +1,14 @@
-import { NearEarthObject } from '@shared/api';
+import { type NearEarthObjectFull } from '@shared/api';
 import { create } from 'zustand';
 
 type State = {
-  items: NearEarthObject[];
+  items: NearEarthObjectFull[];
   count: number;
 };
 
 type Actions = {
-  addToCart: (item: NearEarthObject) => void;
-  removeFromCart: (id: NearEarthObject['id']) => void;
+  addToCart: (item: NearEarthObjectFull) => void;
+  removeFromCart: (id: NearEarthObjectFull['id']) => void;
   reset: () => void;
 };
 
@@ -21,7 +21,9 @@ export const useCart = create<State & Actions>((set) => ({
   ...initialState,
   addToCart: (item) =>
     set((state) => ({
-      items: [...state.items, item],
+      items: [...state.items, item].sort((a, b) =>
+        a.date > b.date ? 1 : a.date < b.date ? -1 : 0
+      ),
       count: state.items.length + 1,
     })),
   removeFromCart: (id) =>
