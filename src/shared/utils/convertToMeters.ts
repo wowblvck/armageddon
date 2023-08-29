@@ -1,4 +1,4 @@
-import { EstimatedDiameter } from '@shared/api';
+import { type EstimatedDiameter } from '@shared/api';
 
 type ConversionFactors = {
   [key in keyof EstimatedDiameter]: number;

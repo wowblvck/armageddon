@@ -55,7 +55,7 @@ export const asteroidsUnits: UnitOptions = {
     {
       id: 3,
       value: 'lunar',
-      label: 'в лунных единицах',
+      label: 'в лунных орбитах',
     },
     {
       id: 4,
@@ -77,7 +77,7 @@ export const asteroidsUnits: UnitOptions = {
     {
       id: 3,
       value: 'miles_per_hour',
-      label: 'в миля/ч',
+      label: 'в миль/ч',
     },
   ],
 };

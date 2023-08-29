@@ -1,22 +1,25 @@
+'use client';
+
 import { DEFAULT_BIG_SIZE } from '@entities/asteroid/config';
 import { AsteroidsUnitFilter, useUnit } from '@features/asteroids-unit-filter';
 import { UnitConverter } from '@features/asteroids-unit-filter/helpers';
-import { NearEarthObject } from '@shared/api';
+import { type NearEarthObjectFull } from '@shared/api';
 import AsteroidSizeIcon from '@shared/ui/asteroid-size-icon';
 import { convertToMeters, localeDate, translateOrbit } from '@shared/utils';
 import calculateAverage from '@shared/utils/calculateAverage';
 import React from 'react';
-import styles from './styles.module.scss';
 import { AsteroidApproachList } from '../asteroid-approach-list';
+import styles from './styles.module.scss';
 
 type AsteroidDetailProps = {
-  item: NearEarthObject;
+  item: NearEarthObjectFull;
 };
 
 export const AsteroidDetail: React.FC<AsteroidDetailProps> = ({ item }) => {
-  const { unitValue } = useUnit();
+  const { unitValue, reset } = useUnit();
 
   const {
+    date,
     close_approach_data,
     absolute_magnitude_h,
     estimated_diameter: {
@@ -27,8 +30,15 @@ export const AsteroidDetail: React.FC<AsteroidDetailProps> = ({ item }) => {
   const averageDiameter = calculateAverage(estimated_diameter_min, estimated_diameter_max);
   const convertedToM = convertToMeters(averageDiameter, unitValue.diameter);
 
+  const approachData = close_approach_data.find((item) => item.close_approach_date === date);
+
   const diameter = new UnitConverter('diameter', [unitValue.diameter]);
-  const convertedDiameter = diameter.convertValue([averageDiameter]);
+  const [convertedDiameter] = diameter.convertValue([averageDiameter]);
+
+  React.useEffect(() => {
+    reset();
+    return () => reset();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -50,6 +60,16 @@ export const AsteroidDetail: React.FC<AsteroidDetailProps> = ({ item }) => {
 
       <div className={styles['data-container']}>
         <p className={styles.title}>Сближения</p>
+        {approachData && (
+          <div className={styles['data-subcontainer']}>
+            <p className={styles['data-label']}>Ближайшее</p>
+            <p className={styles['data-description']}>
+              {localeDate(approachData.close_approach_date_full)} (Орбита:&nbsp;
+              {translateOrbit(approachData.orbiting_body)})
+            </p>
+          </div>
+        )}
+
         <div className={styles['data-subcontainer']}>
           <p className={styles['data-label']}>Дистанция</p>
           <AsteroidsUnitFilter

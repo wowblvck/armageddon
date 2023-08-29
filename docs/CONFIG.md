@@ -4,6 +4,6 @@
 
 [Управление отображением единиц измерения](../src/features/asteroids-unit-filter/config.ts)
 
-[Настройка подключения к API](../src/shared/api/nasa/base.ts)
+[Настройка запросов к API NASA](../src/shared/api/nasa/asteroids.ts)
 
 [Типы данных, получаемые с сервера](../src/shared/api/nasa/models.ts)

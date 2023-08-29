@@ -84,6 +84,10 @@ export interface NearEarthObject {
   orbital_data?: OrbitalData;
 }
 
+export interface NearEarthObjectFull extends NearEarthObject {
+  date: string;
+}
+
 export interface NearEarthObjects {
   [date: string]: NearEarthObject[];
 }
@@ -93,3 +97,23 @@ export interface NEOFeed {
   element_count: number;
   near_earth_objects: NearEarthObjects;
 }
+
+export interface NEOError {
+  code: number;
+  http_error: string;
+  error_message: string;
+  request: string;
+}
+
+export enum ErrorCode {
+  API_KEY_INVALID = 'API_KEY_INVALID',
+}
+
+export interface NEOErrorSpecific {
+  error: {
+    code: ErrorCode;
+    message: string;
+  };
+}
+
+export type NASAError = NEOError | NEOErrorSpecific;

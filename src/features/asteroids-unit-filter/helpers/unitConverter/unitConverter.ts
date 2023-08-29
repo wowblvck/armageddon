@@ -1,4 +1,4 @@
-import { UnitsByType, UnitsByTypeKey } from '@features/asteroids-unit-filter';
+import { type UnitsByType, UnitsByTypeKey } from '@features/asteroids-unit-filter';
 import { roundValue, declension, numberWithSpaces } from '@shared/utils';
 
 type MeasurementUnits = {
@@ -96,6 +96,7 @@ export class UnitConverter<T extends UnitsByTypeKey, U extends UnitsByType[T]>
   }
 
   public convertValue(values: number[]) {
+    if (!values.length) throw new Error('Необходимо предоставить значения');
     if (values.length !== this.units.length) {
       throw new Error('Количество значений должно совпадать с количеством единиц');
     }

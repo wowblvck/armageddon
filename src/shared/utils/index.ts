@@ -7,3 +7,4 @@ export * from './localeDate';
 export * from './translateOrbit';
 export * from './calculateAverage';
 export * from './convertToMeters';
+export * from './findNearestDate';
