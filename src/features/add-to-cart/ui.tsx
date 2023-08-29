@@ -1,16 +1,16 @@
 'use client';
 
-import React from 'react';
 import { useCart } from '@/entities/cart';
 import { type NearEarthObjectFull } from '@/shared/api';
 import { Button } from '@shared/ui/button';
+import React from 'react';
 
 type AddOrRemoveFromCartProps = {
   item: NearEarthObjectFull;
 };
 
 const AddOrRemoveFromCart: React.FC<AddOrRemoveFromCartProps> = ({ item }) => {
-  const { items, addToCart, removeFromCart } = useCart();
+  const { addToCart, items, removeFromCart } = useCart();
 
   const includeItem = items.find((asteroid) => asteroid.id === item.id);
 
@@ -20,7 +20,7 @@ const AddOrRemoveFromCart: React.FC<AddOrRemoveFromCartProps> = ({ item }) => {
   };
 
   return (
-    <Button size="small" variant={includeItem ? 'cart' : 'order'} onClick={() => handleClick()}>
+    <Button onClick={() => handleClick()} size="small" variant={includeItem ? 'cart' : 'order'}>
       {includeItem ? 'В корзине' : 'Заказать'}
     </Button>
   );

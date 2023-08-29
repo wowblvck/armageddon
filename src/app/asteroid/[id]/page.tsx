@@ -4,6 +4,7 @@ import AddOrRemoveFromCart from '@features/add-to-cart/ui';
 import { nasaApi } from '@shared/api';
 import DangerousAlert from '@shared/ui/dangerous-alert';
 import { extractValueInBrackets } from '@shared/utils';
+
 import styles from './styles.module.scss';
 
 type AsteroidDetailPageProps = {

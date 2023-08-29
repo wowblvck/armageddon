@@ -1,24 +1,25 @@
 import { API_KEY, BASE_URL } from '@shared/config';
 import { findNearestDate } from '@shared/utils';
+
 import {
   ErrorCode,
   type NASAError,
+  type NEOFeed,
   type NearEarthObject,
   type NearEarthObjectFull,
-  type NEOFeed,
 } from './models';
 
 const FEED_URL = `/feed`;
 const NEO_URL = `/neo`;
 
 export type GetAsteroidsListParams = {
-  start_date: string;
   end_date?: string;
+  start_date: string;
 };
 
 export const getAsteroidsList = async ({
-  start_date,
   end_date,
+  start_date,
 }: GetAsteroidsListParams): Promise<NearEarthObjectFull[]> => {
   const res = await fetch(
     `${BASE_URL}${FEED_URL}?api_key=${API_KEY}&start_date=${start_date}&end_date=${end_date}`
@@ -34,7 +35,7 @@ export const getAsteroidsList = async ({
           throw new Error('Неизвестная ошибка!');
       }
     } else {
-      const { error_message, code } = errorResponse;
+      const { code, error_message } = errorResponse;
       if (code === 404) {
         throw new Error('Данные об астероидах не найдены');
       }

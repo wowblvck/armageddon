@@ -4,13 +4,13 @@ type Orbit = {
 
 const initialOrbit: Orbit = {
   Earth: 'Земля',
-  Mercury: 'Меркурий',
-  Venus: 'Венера',
-  Mars: 'Марс',
   Jupiter: 'Юпитер',
+  Mars: 'Марс',
+  Mercury: 'Меркурий',
+  Neptune: 'Нептун',
   Saturn: 'Сатурн',
   Uranus: 'Уран',
-  Neptune: 'Нептун',
+  Venus: 'Венера',
 };
 
 export const translateOrbit = (orbit_name: string) => {

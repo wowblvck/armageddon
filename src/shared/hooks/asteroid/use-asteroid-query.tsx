@@ -1,16 +1,16 @@
-import { nasaApi, type NearEarthObjectFull } from '@/shared/api';
+import { type NearEarthObjectFull, nasaApi } from '@/shared/api';
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 import React from 'react';
 
 type UseAsteroidsQueryReturn = {
-  items: NearEarthObjectFull[];
-  isLoading?: boolean;
-  isFetching?: boolean;
-  isError?: boolean;
-  hasMore: boolean;
-  loadMore: () => void;
   error: Error | null;
+  hasMore: boolean;
+  isError?: boolean;
+  isFetching?: boolean;
+  isLoading?: boolean;
+  items: NearEarthObjectFull[];
+  loadMore: () => void;
 };
 
 export const useAsteroidsQuery = (
@@ -27,16 +27,16 @@ export const useAsteroidsQuery = (
 
   const fetchAsteroids = async (): Promise<NearEarthObjectFull[]> => {
     return await nasaApi.asteroids.getAsteroidsList({
-      start_date: currentDate.format('YYYY-MM-DD'),
       end_date: currentDate.format('YYYY-MM-DD'),
+      start_date: currentDate.format('YYYY-MM-DD'),
     });
   };
 
-  const { data, isLoading, isFetching, isError, error } = useQuery<NearEarthObjectFull[], Error>({
-    queryKey: ['asteroids'],
-    queryFn: () => fetchAsteroids(),
-    initialData,
+  const { data, error, isError, isFetching, isLoading } = useQuery<NearEarthObjectFull[], Error>({
     enabled: fetchData,
+    initialData,
+    queryFn: () => fetchAsteroids(),
+    queryKey: ['asteroids'],
   });
 
   React.useEffect(() => {
@@ -56,11 +56,11 @@ export const useAsteroidsQuery = (
 
   return {
     error,
-    items,
     hasMore: hasMoreData,
-    isLoading,
-    isFetching,
     isError,
+    isFetching,
+    isLoading,
+    items,
     loadMore,
   };
 };

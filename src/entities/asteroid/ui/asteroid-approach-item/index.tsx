@@ -1,16 +1,17 @@
-import React from 'react';
-import { type CloseApproachData } from '@shared/api';
-import styles from './styles.module.scss';
 import { useUnit } from '@features/asteroids-unit-filter';
-import { localeDate, translateOrbit } from '@shared/utils';
 import { UnitConverter } from '@features/asteroids-unit-filter/helpers';
+import { type CloseApproachData } from '@shared/api';
+import { localeDate, translateOrbit } from '@shared/utils';
+import React from 'react';
+
+import styles from './styles.module.scss';
 
 type AsteroidApproachItemProps = {
   item: CloseApproachData;
 };
 
 export const AsteroidApproachItem: React.FC<AsteroidApproachItemProps> = ({ item }) => {
-  const { close_approach_date_full, miss_distance, relative_velocity, orbiting_body } = item;
+  const { close_approach_date_full, miss_distance, orbiting_body, relative_velocity } = item;
 
   const { unitValue } = useUnit();
 

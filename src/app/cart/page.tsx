@@ -1,12 +1,13 @@
 'use client';
 
 import { useCart } from '@/entities/cart';
-import React from 'react';
-import styles from './styles.module.scss';
 import { AsteroidList } from '@entities/asteroid/ui';
+import React from 'react';
+
+import styles from './styles.module.scss';
 
 const CartPage = () => {
-  const { reset, items, count } = useCart();
+  const { count, items, reset } = useCart();
 
   React.useEffect(() => {
     return () => {

@@ -1,10 +1,11 @@
 'use client';
 
-import { declension } from '@shared/utils';
 import { Button } from '@shared/ui/button';
-import styles from './styles.module.scss';
+import { declension } from '@shared/utils';
 import Link from 'next/link';
+
 import { useCart } from '../../model';
+import styles from './styles.module.scss';
 
 export const CartInfo = () => {
   const { count } = useCart();

@@ -3,10 +3,11 @@
     "next",
     "plugin:prettier/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:perfectionist/recommended-natural"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["prettier", "unused-imports", "@typescript-eslint"],
+  "plugins": ["prettier", "unused-imports", "@typescript-eslint", "perfectionist"],
   "root": true,
   "rules": {
     "import/no-cycle": [

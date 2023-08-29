@@ -1,6 +1,6 @@
 import moment, { Moment } from 'moment';
 
-export const findNearestDate = (arrayOfDates: string[], findDate: string): string | null => {
+export const findNearestDate = (arrayOfDates: string[], findDate: string): null | string => {
   try {
     let nearestDate: Moment | undefined,
       momentsDate: Moment[] = [];
