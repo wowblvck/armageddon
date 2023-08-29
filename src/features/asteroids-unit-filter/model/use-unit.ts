@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { defaultUnitValues, UnitsByType, UnitsByTypeKey } from '../config';
+
+import { UnitsByType, UnitsByTypeKey, defaultUnitValues } from '../config';
 
 type State = {
   unitValue: {
@@ -8,20 +9,21 @@ type State = {
 };
 
 type Actions = {
-  setUnitValue: <T extends UnitsByTypeKey>(type: T, value: UnitsByType[T]) => void;
   reset: () => void;
+  setUnitValue: <T extends UnitsByTypeKey>(type: T, value: UnitsByType[T]) => void;
 };
 
 const initialState: State = {
   unitValue: {
-    velocity: defaultUnitValues.velocity,
-    distance: defaultUnitValues.distance,
     diameter: defaultUnitValues.diameter,
+    distance: defaultUnitValues.distance,
+    velocity: defaultUnitValues.velocity,
   },
 };
 
 export const useUnit = create<State & Actions>((set) => ({
   ...initialState,
+  reset: () => set(initialState),
   setUnitValue: (type, value) =>
     set((state) => ({
       unitValue: {
@@ -29,5 +31,4 @@ export const useUnit = create<State & Actions>((set) => ({
         [type]: value,
       },
     })),
-  reset: () => set(initialState),
 }));

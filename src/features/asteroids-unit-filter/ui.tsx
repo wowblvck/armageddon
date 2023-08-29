@@ -1,11 +1,12 @@
 'use client';
 
-import { UnitsByType, UnitsByTypeKey } from './config';
-import styles from './styles.module.scss';
-import { asteroidsUnits, defaultUnitValues } from './config';
 import classNames from 'classnames';
 import React from 'react';
+
+import { UnitsByType, UnitsByTypeKey } from './config';
+import { asteroidsUnits, defaultUnitValues } from './config';
 import { useUnit } from './model';
+import styles from './styles.module.scss';
 
 type AsteroidsUnitFilterProps<T extends UnitsByTypeKey> = {
   type: T;
@@ -16,7 +17,7 @@ export const AsteroidsUnitFilter = <T extends UnitsByTypeKey>({
   type,
   units,
 }: AsteroidsUnitFilterProps<T>) => {
-  const { unitValue, setUnitValue } = useUnit();
+  const { setUnitValue, unitValue } = useUnit();
 
   const filteredUnits = units
     ? asteroidsUnits[type].filter((unit) => units.includes(unit.value))

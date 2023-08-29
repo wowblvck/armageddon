@@ -6,10 +6,10 @@ type ConversionFactors = {
 
 export const convertToMeters = (value: number, fromUnit: keyof EstimatedDiameter) => {
   const conversionFactors: ConversionFactors = {
+    feet: 0.3048,
     kilometers: 1000,
     meters: 1,
     miles: 1609.34,
-    feet: 0.3048,
   };
 
   if (!conversionFactors.hasOwnProperty(fromUnit)) {

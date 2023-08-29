@@ -1,15 +1,15 @@
-import React from 'react';
-import Image from 'next/image';
 import bigIcon from '@public/icons/asteroids/big.png';
 import smallIcon from '@public/icons/asteroids/small.png';
+import Image from 'next/image';
+import React from 'react';
 
 type AsteroidSizeIconProps = {
-  value: number;
   bigSize: number;
+  value: number;
 };
 
-const AsteroidSizeIcon: React.FC<AsteroidSizeIconProps> = ({ value, bigSize }) => {
-  return <Image src={value > bigSize ? bigIcon : smallIcon} alt="Asteroid" />;
+const AsteroidSizeIcon: React.FC<AsteroidSizeIconProps> = ({ bigSize, value }) => {
+  return <Image alt="Asteroid" src={value > bigSize ? bigIcon : smallIcon} />;
 };
 
 export default AsteroidSizeIcon;

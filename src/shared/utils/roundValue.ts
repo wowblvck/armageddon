@@ -1,6 +1,6 @@
 type RoundValueReturn = {
-  result: number;
   isRounded?: boolean;
+  result: number;
 };
 
 export const roundValue = (value: number): RoundValueReturn => {
@@ -14,7 +14,7 @@ export const roundValue = (value: number): RoundValueReturn => {
     result = Number(value.toFixed(3));
   }
   return {
-    result,
     isRounded,
+    result,
   };
 };

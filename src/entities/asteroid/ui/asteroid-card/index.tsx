@@ -13,6 +13,7 @@ import calculateAverage from '@shared/utils/calculateAverage';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
 import styles from './styles.module.scss';
 
 export type AsteroidCardProps = {
@@ -24,14 +25,14 @@ export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, showOrderButto
   const { unitValue } = useUnit();
 
   const {
-    date,
     close_approach_data,
+    date,
     estimated_diameter: {
-      [DEFAULT_DIAMETER_UNIT]: { estimated_diameter_min, estimated_diameter_max },
+      [DEFAULT_DIAMETER_UNIT]: { estimated_diameter_max, estimated_diameter_min },
     },
-    name,
-    is_potentially_hazardous_asteroid,
     id,
+    is_potentially_hazardous_asteroid,
+    name,
   } = item;
 
   const averageDiameter = calculateAverage(estimated_diameter_min, estimated_diameter_max);
@@ -53,9 +54,9 @@ export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, showOrderButto
       <div className={styles.description}>
         <div className={styles['distance-container']}>
           <p className={styles['distance-title']}>{convertedDistance}</p>
-          <Image fill className={styles.arrow} src={arrowIcon} alt="Distance" />
+          <Image alt="Distance" className={styles.arrow} fill src={arrowIcon} />
         </div>
-        <AsteroidSizeIcon value={convertToM} bigSize={DEFAULT_BIG_SIZE} />
+        <AsteroidSizeIcon bigSize={DEFAULT_BIG_SIZE} value={convertToM} />
         <div className={styles['label-container']}>
           <Link className={styles.label} href={`/asteroid/${id}`}>
             {extractValueInBrackets(name)}

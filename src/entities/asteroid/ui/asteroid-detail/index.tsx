@@ -8,6 +8,7 @@ import AsteroidSizeIcon from '@shared/ui/asteroid-size-icon';
 import { convertToMeters, localeDate, translateOrbit } from '@shared/utils';
 import calculateAverage from '@shared/utils/calculateAverage';
 import React from 'react';
+
 import { AsteroidApproachList } from '../asteroid-approach-list';
 import styles from './styles.module.scss';
 
@@ -16,14 +17,14 @@ type AsteroidDetailProps = {
 };
 
 export const AsteroidDetail: React.FC<AsteroidDetailProps> = ({ item }) => {
-  const { unitValue, reset } = useUnit();
+  const { reset, unitValue } = useUnit();
 
   const {
-    date,
-    close_approach_data,
     absolute_magnitude_h,
+    close_approach_data,
+    date,
     estimated_diameter: {
-      [unitValue.diameter]: { estimated_diameter_min, estimated_diameter_max },
+      [unitValue.diameter]: { estimated_diameter_max, estimated_diameter_min },
     },
   } = item;
 
@@ -48,7 +49,7 @@ export const AsteroidDetail: React.FC<AsteroidDetailProps> = ({ item }) => {
           <p className={styles['data-label']}>Диаметр</p>
           <AsteroidsUnitFilter type="diameter" units={['kilometers', 'meters', 'miles', 'feet']} />
           <div className={styles['diameter-description']}>
-            <AsteroidSizeIcon value={convertedToM} bigSize={DEFAULT_BIG_SIZE} />
+            <AsteroidSizeIcon bigSize={DEFAULT_BIG_SIZE} value={convertedToM} />
             <p className={styles['data-title']}>Ø {convertedDiameter}</p>
           </div>
         </div>

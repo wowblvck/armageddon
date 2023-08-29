@@ -1,17 +1,17 @@
 import { EstimatedDiameter, MissDistance, RelativeVelocity } from '@shared/api';
 
 export type UnitsByType = {
+  diameter: keyof EstimatedDiameter;
   distance: keyof MissDistance;
   velocity: keyof RelativeVelocity;
-  diameter: keyof EstimatedDiameter;
 };
 
 export type UnitsByTypeKey = keyof UnitsByType;
 
 export type UnitOption<T extends UnitsByTypeKey> = {
   id: number;
-  value: UnitsByType[T];
   label: string;
+  value: UnitsByType[T];
 };
 
 export type UnitOptions = {
@@ -22,62 +22,62 @@ export const asteroidsUnits: UnitOptions = {
   diameter: [
     {
       id: 1,
-      value: 'kilometers',
       label: 'в километрах',
+      value: 'kilometers',
     },
     {
       id: 2,
-      value: 'meters',
       label: 'в метрах',
+      value: 'meters',
     },
     {
       id: 3,
-      value: 'miles',
       label: 'в милях',
+      value: 'miles',
     },
     {
       id: 4,
-      value: 'feet',
       label: 'в футах',
+      value: 'feet',
     },
   ],
   distance: [
     {
       id: 1,
-      value: 'kilometers',
       label: 'в километрах',
+      value: 'kilometers',
     },
     {
       id: 2,
-      value: 'astronomical',
       label: 'в астрономических единицах',
+      value: 'astronomical',
     },
     {
       id: 3,
-      value: 'lunar',
       label: 'в лунных орбитах',
+      value: 'lunar',
     },
     {
       id: 4,
-      value: 'miles',
       label: 'в милях',
+      value: 'miles',
     },
   ],
   velocity: [
     {
       id: 1,
-      value: 'kilometers_per_hour',
       label: 'в км/ч',
+      value: 'kilometers_per_hour',
     },
     {
       id: 2,
-      value: 'kilometers_per_second',
       label: 'в км/c',
+      value: 'kilometers_per_second',
     },
     {
       id: 3,
-      value: 'miles_per_hour',
       label: 'в миль/ч',
+      value: 'miles_per_hour',
     },
   ],
 };
