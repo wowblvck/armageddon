@@ -1,10 +1,10 @@
-import { NearEarthObject, nasaApi } from '@/shared/api';
+import { nasaApi, type NearEarthObjectFull } from '@/shared/api';
 import { useQuery } from '@tanstack/react-query';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import React from 'react';
 
 type UseAsteroidsQueryReturn = {
-  items: NearEarthObject[];
+  items: NearEarthObjectFull[];
   isLoading?: boolean;
   isFetching?: boolean;
   isError?: boolean;
@@ -13,37 +13,45 @@ type UseAsteroidsQueryReturn = {
   error: Error | null;
 };
 
-export const useAsteroidsQuery = (initialDate?: Moment): UseAsteroidsQueryReturn => {
-  const currentDate = moment();
-  const [date, setDate] = React.useState(initialDate || currentDate);
-  const [hasMoreData, setHasMoreData] = React.useState(true);
-  const [items, setItems] = React.useState<NearEarthObject[]>([]);
+export const useAsteroidsQuery = (
+  initialData?: NearEarthObjectFull[],
+  initialDate?: string
+): UseAsteroidsQueryReturn => {
+  const startDate = moment(initialDate) || moment();
 
-  const {
-    data: asteroids,
-    isLoading,
-    isFetching,
-    isError,
-    error,
-  } = useQuery<NearEarthObject[], Error>({
-    queryKey: ['asteroids', date],
-    queryFn: () =>
-      nasaApi.asteroids.getAsteroidsList({
-        start_date: date.format('YYYY-MM-DD'),
-        end_date: date.format('YYYY-MM-DD'),
-      }),
+  const [currentDate, setCurrentDate] = React.useState(startDate);
+  const [hasMoreData, setHasMoreData] = React.useState(true);
+  const [items, setItems] = React.useState<NearEarthObjectFull[]>(initialData || []);
+  const [fetchData, setFetchData] = React.useState(false);
+  const [firstInit, setFirstInit] = React.useState(true);
+
+  const fetchAsteroids = async (): Promise<NearEarthObjectFull[]> => {
+    return await nasaApi.asteroids.getAsteroidsList({
+      start_date: currentDate.format('YYYY-MM-DD'),
+      end_date: currentDate.format('YYYY-MM-DD'),
+    });
+  };
+
+  const { data, isLoading, isFetching, isError, error } = useQuery<NearEarthObjectFull[], Error>({
+    queryKey: ['asteroids'],
+    queryFn: () => fetchAsteroids(),
+    initialData,
+    enabled: fetchData,
   });
 
   React.useEffect(() => {
-    if (asteroids) {
-      setItems((prevItems) => [...prevItems, ...asteroids]);
-      setHasMoreData(asteroids.length > 0);
+    if (data && !firstInit) {
+      setItems((prevItems) => [...prevItems, ...data]);
+      setHasMoreData(data.length > 0);
+      setFetchData(false);
     }
-  }, [asteroids]);
+  }, [data]);
 
   const loadMore = () => {
-    const nextDate = date.clone().add(1, 'day');
-    setDate(nextDate);
+    const nextDate = currentDate.clone().add(1, 'day');
+    setCurrentDate(nextDate);
+    setFetchData(true);
+    if (firstInit) setFirstInit(false);
   };
 
   return {

@@ -1,4 +1,4 @@
-import { EstimatedDiameter } from '@shared/api';
+import { type EstimatedDiameter } from '@shared/api';
 
 export const DEFAULT_DIAMETER_UNIT: keyof EstimatedDiameter = 'meters';
 

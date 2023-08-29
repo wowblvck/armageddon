@@ -1,4 +1,5 @@
-import { CloseApproachData } from '@shared/api';
+import React from 'react';
+import { type CloseApproachData } from '@shared/api';
 import { AsteroidApproachItem } from '../asteroid-approach-item';
 import styles from './styles.module.scss';
 

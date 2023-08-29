@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/image';
 import bigIcon from '@public/icons/asteroids/big.png';
 import smallIcon from '@public/icons/asteroids/small.png';

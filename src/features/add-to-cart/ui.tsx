@@ -1,9 +1,12 @@
+'use client';
+
+import React from 'react';
 import { useCart } from '@/entities/cart';
-import { NearEarthObject } from '@/shared/api';
+import { type NearEarthObjectFull } from '@/shared/api';
 import { Button } from '@shared/ui/button';
 
 type AddOrRemoveFromCartProps = {
-  item: NearEarthObject;
+  item: NearEarthObjectFull;
 };
 
 const AddOrRemoveFromCart: React.FC<AddOrRemoveFromCartProps> = ({ item }) => {

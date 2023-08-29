@@ -1,12 +1,13 @@
-import type { Metadata } from 'next';
-import localFont from 'next/font/local';
-import { Passion_One } from 'next/font/google';
-import './styles/index.scss';
-import styles from './styles/layout.module.scss';
+import React from 'react';
 import { Header } from '@common/header';
 import { Footer } from '@common/footer';
-import Providers from './providers';
+import type { Metadata } from 'next';
+import { Passion_One } from 'next/font/google';
+import localFont from 'next/font/local';
 import Head from 'next/head';
+import Providers from './providers';
+import './styles/index.scss';
+import styles from './styles/layout.module.scss';
 
 const passionOne = Passion_One({
   weight: ['400'],
@@ -41,11 +42,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="ru" className={`${passionOne.variable} ${helvetica.variable}`}>
       <Head>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
       </Head>
       <body>
         <Header />
@@ -56,4 +57,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

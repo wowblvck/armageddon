@@ -1,9 +1,11 @@
+'use client';
+
 import { DEFAULT_BIG_SIZE, DEFAULT_DIAMETER_UNIT } from '@entities/asteroid/config';
 import AddOrRemoveFromCart from '@features/add-to-cart/ui';
 import { useUnit } from '@features/asteroids-unit-filter';
 import { UnitConverter } from '@features/asteroids-unit-filter/helpers';
 import arrowIcon from '@public/icons/arrow.svg';
-import { NearEarthObject } from '@shared/api';
+import { type NearEarthObjectFull } from '@shared/api';
 import AsteroidSizeIcon from '@shared/ui/asteroid-size-icon';
 import DangerousAlert from '@shared/ui/dangerous-alert';
 import { convertToMeters, extractValueInBrackets, formatDate } from '@shared/utils';
@@ -14,7 +16,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 
 export type AsteroidCardProps = {
-  item: NearEarthObject;
+  item: NearEarthObjectFull;
   showOrderButton: boolean;
 };
 
@@ -22,6 +24,7 @@ export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, showOrderButto
   const { unitValue } = useUnit();
 
   const {
+    date,
     close_approach_data,
     estimated_diameter: {
       [DEFAULT_DIAMETER_UNIT]: { estimated_diameter_min, estimated_diameter_max },
@@ -34,17 +37,19 @@ export const AsteroidCard: React.FC<AsteroidCardProps> = ({ item, showOrderButto
   const averageDiameter = calculateAverage(estimated_diameter_min, estimated_diameter_max);
   const convertToM = convertToMeters(averageDiameter, DEFAULT_DIAMETER_UNIT);
   const diameter = new UnitConverter('diameter', [DEFAULT_DIAMETER_UNIT]);
-  const convertedDiameter = diameter.convertValue([averageDiameter]);
+  const [convertedDiameter] = diameter.convertValue([averageDiameter]);
 
-  const approachDate = close_approach_data[0].close_approach_date;
+  const approachInfo = close_approach_data.find((item) => item.close_approach_date === date);
 
-  const approachDistance = Number(close_approach_data[0].miss_distance[unitValue.distance]);
+  const approachDistance = approachInfo && Number(approachInfo.miss_distance[unitValue.distance]);
   const distance = new UnitConverter('distance', [unitValue.distance]);
-  const convertedDistance = distance.convertValue([approachDistance]);
+  const [convertedDistance] = distance.convertValue([approachDistance ? approachDistance : 0]);
 
   return (
     <div className={styles.container}>
-      <p className={styles.date}>{formatDate(approachDate)}</p>
+      {approachInfo && (
+        <p className={styles.date}>{formatDate(approachInfo.close_approach_date)}</p>
+      )}
       <div className={styles.description}>
         <div className={styles['distance-container']}>
           <p className={styles['distance-title']}>{convertedDistance}</p>

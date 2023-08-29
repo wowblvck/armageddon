@@ -1,4 +1,5 @@
-import { CloseApproachData } from '@shared/api';
+import React from 'react';
+import { type CloseApproachData } from '@shared/api';
 import styles from './styles.module.scss';
 import { useUnit } from '@features/asteroids-unit-filter';
 import { localeDate, translateOrbit } from '@shared/utils';
@@ -14,10 +15,12 @@ export const AsteroidApproachItem: React.FC<AsteroidApproachItemProps> = ({ item
   const { unitValue } = useUnit();
 
   const distance = new UnitConverter('distance', [unitValue.distance]);
-  const convertedDistance = distance.convertValue([Number(miss_distance[unitValue.distance])]);
+  const [convertedDistance] = distance.convertValue([Number(miss_distance[unitValue.distance])]);
 
   const velocity = new UnitConverter('velocity', [unitValue.velocity]);
-  const convertedVelocity = velocity.convertValue([Number(relative_velocity[unitValue.velocity])]);
+  const [convertedVelocity] = velocity.convertValue([
+    Number(relative_velocity[unitValue.velocity]),
+  ]);
 
   return (
     <details className={styles.details}>

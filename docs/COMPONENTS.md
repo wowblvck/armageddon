@@ -1,6 +1,24 @@
 <h1 align="center">Компоненты</h1>
 
 <details>
+  <summary><a href="../src/entities/asteroid/ui/asteroids/index.tsx">Asteroids</a></summary>
+
+> Назначение: отображение астероидов и их последующая загрузка
+
+#### Properties
+
+```
+items: NearEarthObjectFull[] - исходный массив астероидов (необходим для предварительного рендеринга, например, для SSR)
+initialDate: string - дата получения исходного массива астероидов
+```
+
+### Использование
+
+См. [Asteroids](../src/entities/asteroid/ui/asteroids/index.tsx)
+
+</details>
+
+<details>
   <summary><a href="../src/entities/asteroid/ui/asteroid-list/index.tsx">AsteroidList</a></summary>
 
 > Назначение: вывод списка астероидов
@@ -8,7 +26,7 @@
 #### Properties
 
 ```
-items: NearEarthObject[] - массив астероидов
+items: NearEarthObjectFull[] - массив астероидов
 innerRef?: React.LegacyRef<HTMLLIElement> - ссылка на Ref из Intersection Observer для определения последнего элемента списка (для работы подгрузки при скроллинге)
 showOrderButton?: boolean - состояние отображения кнопки "ЗАКАЗАТЬ"
 ```
@@ -19,7 +37,7 @@ showOrderButton?: boolean - состояние отображения кнопк
 const Page = () => {
   const { ref, inView } = useInView({ root: null, threshold: 1 });
 
-  const [asteroids, setAsteroids] = useState([]);
+  const [asteroids, setAsteroids] = useState<NearEarthObjectFull[]>([]);
 
   useEffect(() => {
     fetch('https://example.com/asteroids').then((res) => res.json()).then((data) => setAsteroids(data));
@@ -45,7 +63,7 @@ const Page = () => {
 #### Properties
 
 ```
-item: NearEarthObject - объект астероида для отображения
+item: NearEarthObjectFull - объект астероида для отображения
 showOrderButton: boolean - состояние отображения кнопки "ЗАКАЗАТЬ"
 ```
 
@@ -76,7 +94,7 @@ export const List = () => {
 #### Properties
 
 ```
- item: NearEarthObject - объект астероида
+ item: NearEarthObjectFull - объект астероида
 ```
 
 ### Использование
@@ -84,7 +102,7 @@ export const List = () => {
 ```
 const Page = () => {
 
-  const [asteroid, setAsteroid] = useState({});
+  const [asteroid, setAsteroid] = useState<NearEarthObjectFull>({});
 
   useEffect(() => {
     fetch('http://example.com/asteroid').then((res) => res.json()).then((data) => setAsteroid(data));
@@ -118,7 +136,7 @@ data: CloseApproachData[] - массив сближений астероида
 ```
 const Page = () => {
 
-  const [asteroid, setAsteroid] = useState({});
+  const [asteroid, setAsteroid] = useState<NearEarthObjectFull>({});
 
   useEffect(() => {
     fetch('http://example.com/asteroid').then((res) => res.json()).then((data) => setAsteroid(data));
@@ -151,7 +169,7 @@ item: CloseApproachData - объект сближения с астероидо�
 
 ```
 const Page = () => {
-  const [asteroid, setAsteroid] = useState({});
+  const [asteroid, setAsteroid] = useState<NearEarthObjectFull>({});
 
   useEffect(() => {
     fetch('http://example.com/asteroid').then((res) => res.json()).then((data) => setAsteroid(data));
@@ -226,7 +244,7 @@ const Page = () => {
 #### Properties
 
 ```
-item: NearEarthObject - объект астероида
+item: NearEarthObjectFull - объект астероида
 ```
 
 ### Использование
@@ -234,7 +252,7 @@ item: NearEarthObject - объект астероида
 ```
 const Page = () => {
 
-  const [asteroid, setAsteroid] = useState({});
+  const [asteroid, setAsteroid] = useState<NearEarthObjectFull({});
 
   useEffect(() => {
     fetch('http://example.com/asteroid').then((res) => res.json()).then((data) => setAsteroid(data));
@@ -295,7 +313,7 @@ bigSize: number - значение, при котором будет отобр�
 ```
 const Page = () => {
 
-  const [asteroid, setAsteroid] = useState({});
+  const [asteroid, setAsteroid] = useState<NearEarthObjectFull>({});
 
   useEffect(() => {
     fetch('http://example.com/asteroid').then((res) => res.json()).then((data) => setAsteroid(data));
@@ -323,7 +341,7 @@ const Page = () => {
 ```
 const Page = () => {
 
-  const [asteroid, setAsteroid] = useState({});
+  const [asteroid, setAsteroid] = useState<NearEarthObjectFull>({});
 
   useEffect(() => {
     fetch('http://example.com/asteroid').then((res) => res.json()).then((data) => setAsteroid(data));
@@ -351,7 +369,7 @@ const Page = () => {
 ```
 const Page = () => {
 
-  const [asteroid, setAsteroid] = useState({});
+  const [asteroid, setAsteroid] = useState<NearEarthObjectFull>({});
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

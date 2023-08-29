@@ -1,24 +1,17 @@
-'use client';
-
-import { AsteroidList } from '@entities/asteroid/ui/';
+import Asteroids from '@entities/asteroid/ui/asteroids';
 import { CartInfo } from '@entities/cart/ui';
 import { AsteroidsUnitFilter } from '@features/asteroids-unit-filter';
-import { useAsteroidsQuery } from '@shared/hooks';
-import Spin from '@shared/ui/spin';
-import React from 'react';
-import { useInView } from 'react-intersection-observer';
-import styles from './styles.module.scss';
+import { nasaApi } from '@shared/api';
+import moment from 'moment';
+import styles from './styles/page.module.scss';
 
-const AsteroidsPage = () => {
-  const { ref, inView } = useInView({ root: null, threshold: 1 });
+const AsteroidsPage = async () => {
+  const currentDate = moment();
 
-  const { items, isLoading, hasMore, loadMore, isError, error } = useAsteroidsQuery();
-
-  React.useEffect(() => {
-    if (inView) {
-      loadMore();
-    }
-  }, [inView]);
+  const items = await nasaApi.asteroids.getAsteroidsList({
+    start_date: currentDate.format('YYYY-MM-DD'),
+    end_date: currentDate.format('YYYY-MM-DD'),
+  });
 
   return (
     <>
@@ -28,10 +21,7 @@ const AsteroidsPage = () => {
           <AsteroidsUnitFilter type="distance" units={['kilometers', 'lunar']} />
         </div>
 
-        {!!items.length && <AsteroidList items={items} innerRef={ref} showOrderButton={true} />}
-        {isLoading && <Spin className={styles.spin} />}
-        {!hasMore && <p className={styles.error}>Больше нечего тебе показать :(</p>}
-        {isError && error && <p className={styles.error}>{error.message}</p>}
+        <Asteroids items={items} initialDate={currentDate.toISOString()} />
       </section>
       <section>
         <CartInfo />
