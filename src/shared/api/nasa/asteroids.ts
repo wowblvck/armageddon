@@ -1,5 +1,6 @@
-import { API_KEY, BASE_URL } from '@shared/config';
+import { API_KEY, BASE_URL, DEFAULT_TIMEZONE } from '@shared/config';
 import { findNearestDate } from '@shared/utils';
+import moment from 'moment-timezone';
 
 import {
   ErrorCode,
@@ -72,7 +73,7 @@ export const getAsteroidById = async (asteroidId: string): Promise<NearEarthObje
   const data: NearEarthObject = await res.json();
 
   const approachDates = data.close_approach_data.map((item) => item.close_approach_date);
-  const date = findNearestDate(approachDates, new Date().toISOString());
+  const date = findNearestDate(approachDates, moment().tz(DEFAULT_TIMEZONE).toISOString());
 
   return { ...data, date: date ? date : '' };
 };

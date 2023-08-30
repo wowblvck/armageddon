@@ -20,6 +20,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "next": "^13.4.19",
     "normalize.css": "^8.0.1",
     "prettier": "^3.0.2",

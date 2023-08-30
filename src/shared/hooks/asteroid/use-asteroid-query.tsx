@@ -1,6 +1,7 @@
 import { type NearEarthObjectFull, nasaApi } from '@/shared/api';
+import { DEFAULT_TIMEZONE } from '@shared/config';
 import { useQuery } from '@tanstack/react-query';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import React from 'react';
 
 type UseAsteroidsQueryReturn = {
@@ -17,7 +18,7 @@ export const useAsteroidsQuery = (
   initialData?: NearEarthObjectFull[],
   initialDate?: string
 ): UseAsteroidsQueryReturn => {
-  const startDate = moment(initialDate) || moment();
+  const startDate = moment(initialDate) || moment().tz(DEFAULT_TIMEZONE);
 
   const [currentDate, setCurrentDate] = React.useState(startDate);
   const [hasMoreData, setHasMoreData] = React.useState(true);
