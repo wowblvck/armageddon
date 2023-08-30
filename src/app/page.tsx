@@ -7,11 +7,11 @@ import moment from 'moment';
 import styles from './styles/page.module.scss';
 
 const AsteroidsPage = async () => {
-  const currentDate = moment();
+  const currentDate = moment().format('YYYY-MM-DD');
 
   const items = await nasaApi.asteroids.getAsteroidsList({
-    end_date: currentDate.format('YYYY-MM-DD'),
-    start_date: currentDate.format('YYYY-MM-DD'),
+    end_date: currentDate,
+    start_date: currentDate,
   });
 
   return (
@@ -22,7 +22,7 @@ const AsteroidsPage = async () => {
           <AsteroidsUnitFilter type="distance" units={['kilometers', 'lunar']} />
         </div>
 
-        <Asteroids initialDate={currentDate.toISOString()} items={items} />
+        <Asteroids initialDate={currentDate} items={items} />
       </section>
       <section>
         <CartInfo />
