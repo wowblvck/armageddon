@@ -2,12 +2,13 @@ import Asteroids from '@entities/asteroid/ui/asteroids';
 import { CartInfo } from '@entities/cart/ui';
 import { AsteroidsUnitFilter } from '@features/asteroids-unit-filter';
 import { nasaApi } from '@shared/api';
-import moment from 'moment';
+import { DEFAULT_TIMEZONE } from '@shared/config';
+import moment from 'moment-timezone';
 
 import styles from './styles/page.module.scss';
 
 const AsteroidsPage = async () => {
-  const currentDate = moment();
+  const currentDate = moment().tz(DEFAULT_TIMEZONE);
 
   const items = await nasaApi.asteroids.getAsteroidsList({
     end_date: currentDate.format('YYYY-MM-DD'),
