@@ -23,7 +23,10 @@ export const getAsteroidsList = async ({
   start_date,
 }: GetAsteroidsListParams): Promise<NearEarthObjectFull[]> => {
   const res = await fetch(
-    `${BASE_URL}${FEED_URL}?api_key=${API_KEY}&start_date=${start_date}&end_date=${end_date}`
+    `${BASE_URL}${FEED_URL}?api_key=${API_KEY}&start_date=${start_date}&end_date=${end_date}`,
+    {
+      cache: 'no-store',
+    }
   );
   if (!res.ok) {
     const errorResponse: NASAError = await res.json();
